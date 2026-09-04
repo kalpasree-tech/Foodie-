@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🍔 Foodie</h1>
+
+        <nav>
+            <a href="#restaurants">Restaurants</a>
+            <a href="#menu">Menu</a>
+            <a href="#cart">Cart 🛒</a>
+             <button onclick="openLogin()">Login / Signup</button>
+        </nav>
+    </header>
+
+
+    <section class="hero">
+        <h2>Delicious food at your doorstep</h2>
+        <p>Order your favourite food online!</p>
+
+        <button onclick="document.getElementById('menu').scrollIntoView()">
+    Order Now
+</button>
+    </section>
+
+
+    <section id="restaurants">
+
+        <h2>Popular Restaurants</h2>
+
+        <div class="restaurant-container">
+
+            <div class="restaurant">
+        <div class="restaurant-icon">🍕</div>
+
+        <h3>Pizza Palace</h3>
+
+        <p>Pizza • Italian</p>
+
+        <span>⭐ 4.5</span>
+
+       <button onclick="filterFood('pizza'); document.getElementById('menu').scrollIntoView()">
+    View Menu
+</button>
+    </div>
+
+
+    <div class="restaurant">
+        <div class="restaurant-icon">🍔</div>
+
+        <h3>Burger House</h3>
+
+        <p>Burgers • Fast Food</p>
+
+        <span>⭐ 4.7</span>
+
+       <button onclick="filterFood('burger'); document.getElementById('menu').scrollIntoView()">
+    View Menu
+</button>
+    </div>
+
+
+    <div class="restaurant">
+        <div class="restaurant-icon">🍛</div>
+
+        <h3>Indian Kitchen</h3>
+
+        <p>Indian • Biryani</p>
+
+        <span>⭐ 4.8</span>
+
+        <button onclick="filterFood('indian'); document.getElementById('menu').scrollIntoView()">
+    View Menu
+</button>
+    </div>
+
+</div>
+
+    </section>
+
+
+    <section id="menu">
+
+        <h2>Food Menu</h2>
+        <input
+    type="text"
+    id="search"
+    placeholder="🔍 Search for food..."
+    onkeyup="searchFood()"
+    >
+    <div class="categories">
+
+    <button onclick="filterFood('all')">All</button>
+
+    <button onclick="filterFood('pizza')">🍕 Pizza</button>
+
+    <button onclick="filterFood('burger')">🍔 Burgers</button>
+
+    <button onclick="filterFood('indian')">🍛 Indian</button>
+
+</div>
+>
+
+        <div class="menu-container">
+
+            <div class="food" data-category="pizza">
+                 <button class="favorite" onclick="toggleFavorite(this)">
+        🤍
+    </button>
+                
+                <h3>🍕 Margherita Pizza</h3>
+                <p>₹199</p>
+                <button onclick="addToCart('Margherita Pizza', 199)">
+                    Add to Cart
+                </button>
+            </div>
+
+            <div class="food" data-category="burger">
+                 <button class="favorite" onclick="toggleFavorite(this)">
+        🤍
+    </button>
+                
+                <h3>🍔 Cheese Burger</h3>
+                <p>₹149</p>
+                <button onclick="addToCart('Cheese Burger', 149)">
+                    Add to Cart
+                </button>
+            </div>
+
+            <div class="food" data-category="indian">
+                 <button class="favorite" onclick="toggleFavorite(this)">
+        🤍
+    </button>
+                
+                <h3>🍛 Chicken Biryani</h3>
+                <p>₹249</p>
+                <button onclick="addToCart('Chicken Biryani', 249)">
+                    Add to Cart
+                </button>
+            </div>
+            <div class="food" data-category="pizza">
+
+    <button class="favorite" onclick="toggleFavorite(this)">
+        🤍
+    </button>
+
+    <h3>🍕 Pepperoni Pizza</h3>
+
+    <p>₹249</p>
+
+    <button onclick="addToCart('Pepperoni Pizza', 249)">
+        Add to Cart
+    </button>
+
+</div>
+
+        </div>
+
+
+    </section>
+
+
+    <section id="cart">
+
+        <h2>🛒 Your Cart</h2>
+
+        <div id="cart-items">
+            Your cart is empty.
+        </div>
+
+        <div class="bill">
+
+    <p>Subtotal: ₹<span id="subtotal">0</span></p>
+
+    <p>Delivery Charge: ₹<span id="delivery">40</span></p>
+
+    <h3>Total: ₹<span id="total">0</span></h3>
+    <div class="coupon">
+
+    <h3>🏷️ Apply Coupon</h3>
+
+    <input
+        type="text"
+        id="coupon"
+        placeholder="Enter coupon code"
+    >
+
+    <button onclick="applyCoupon()">Apply</button>
+
+    <p id="coupon-message"></p>
+
+</div>
+
+</div>
+<div class="delivery-address">
+
+    <h3>📍 Delivery Address</h3>
+
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <input type="tel" id="phone" placeholder="Enter phone number">
+
+    <textarea id="address" placeholder="Enter your address"></textarea>
+
+    <input type="text" id="city" placeholder="Enter your city">
+
+    <input type="text" id="pincode" placeholder="Enter PIN code">
+
+</div>
+<div class="payment">
+    <h3>💳 Select Payment Method</h3>
+
+    <label>
+        <input type="radio" name="payment" value="cod">
+        💵 Cash on Delivery
+    </label>
+
+    <label>
+        <input type="radio" name="payment" value="upi">
+        📱 UPI
+    </label>
+
+    <label>
+        <input type="radio" name="payment" value="card">
+        💳 Card
+    </label>
+</div>
+
+        <button onclick="checkout()">Checkout</button>
+
+    </section>
+
+<div id="order-confirmation"></div>
+<div id="login-box">
+
+    <div class="login-content">
+
+        <span class="close" onclick="closeLogin()">×</span>
+
+        <h2>🍔 Foodie Login</h2>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter your name"
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+        >
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+        >
+
+        <button onclick="login()">Login</button>
+
+        <p id="login-message"></p>
+
+    </div>
+
+</div>
+    <script src="script.js"></script>
+
+</body>
+</html>
